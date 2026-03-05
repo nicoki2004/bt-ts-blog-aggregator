@@ -1,0 +1,35 @@
+# --- Carpeta de dependencias ---
+node_modules/
+.pnpm-debug.log*
+
+# --- Archivos de compilación (Evita duplicados en Nvim) ---
+dist/
+out/
+build/
+*.tsbuildinfo
+
+# --- Logs y archivos temporales ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+repl.log
+
+# --- Variables de entorno (¡Seguridad!) ---
+.env
+.env.local
+.env.*.local
+
+# --- Archivos del sistema y editores ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+.netrw*
+
+# --- Cobertura de tests ---
+coverage/
+.nyc_output/

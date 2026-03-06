@@ -58,3 +58,8 @@ function writeConfig(config: Config) {
   const data = JSON.stringify(rawConfig, null, 2);
   fs.writeFileSync(fullPath, data, { encoding: "utf-8" });
 }
+
+export function getConfigUserName(): string {
+  const cfg = readConfig();
+  return cfg.currentUserName;
+}

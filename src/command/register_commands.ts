@@ -1,5 +1,10 @@
 import { CommandsRegistry, registerCommand } from "./command_handler";
-import { commandLogin, commandRegister, commandReset } from "./users";
+import {
+  commandLogin,
+  commandRegister,
+  commandReset,
+  commandUsers,
+} from "./users";
 
 export function getCommands(commandsRegistry: CommandsRegistry) {
   registerCommand(
@@ -27,5 +32,14 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
     "reset",
     0,
     commandReset,
+  );
+
+  registerCommand(
+    commandsRegistry,
+    "users",
+    "List all users",
+    "users",
+    0,
+    commandUsers,
   );
 }

@@ -1,5 +1,10 @@
-import { setUser } from "src/config/config";
-import { createUser, deleteAllUsers, getUser } from "src/lib/db/queries/users";
+import { getConfigUserName, setUser } from "src/config/config";
+import {
+  createUser,
+  deleteAllUsers,
+  getUser,
+  getUsers,
+} from "src/lib/db/queries/users";
 
 export async function commandLogin(
   cmdName: string,
@@ -52,4 +57,22 @@ export async function commandReset(
   }
 
   console.log(`Users has been deleted`);
+}
+
+export async function commandUsers(
+  cmdName: string,
+  ...args: string[]
+): Promise<void> {
+  let users;
+  try {
+    users = await getUsers();
+  } catch (e) {
+    throw new Error(`Error registering a user - ${e}`);
+  }
+  const currentUser = getConfigUserName();
+  users.forEach((user) => {
+    console.log(
+      ` * ${user.name}${currentUser === user.name ? " (current)" : ""}`,
+    );
+  });
 }

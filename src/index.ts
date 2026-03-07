@@ -1,5 +1,5 @@
-import { CommandsRegistry, runCommand } from "./command/command_handler";
-import { getCommands } from "./command/register_commands";
+import { CommandsRegistry, runCommand } from "./commands/command_handler";
+import { getCommands } from "./commands/register_commands";
 
 async function main() {
   const args = process.argv.slice(2);

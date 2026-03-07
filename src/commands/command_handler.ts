@@ -1,5 +1,3 @@
-import { exit } from "node:process";
-
 type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
 
 type CommandDefinition = {
@@ -13,14 +11,13 @@ type CommandDefinition = {
 export type CommandsRegistry = Record<string, CommandDefinition>;
 
 export function registerCommand(
-  registry: CommandsRegistry, // Corregido el nombre del tipo (era CommandRegistry)
+  registry: CommandsRegistry,
   cmdName: string,
   description: string,
   usage: string,
   minArgs: number,
   handler: CommandHandler,
 ) {
-  // Guardamos en el objeto usando cmdName como llave (key)
   registry[cmdName] = {
     cmdName: cmdName,
     description: description,

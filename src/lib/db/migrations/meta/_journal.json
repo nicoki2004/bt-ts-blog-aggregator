@@ -8,6 +8,20 @@
       "when": 1772807855791,
       "tag": "0000_bumpy_cammi",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777995433596,
+      "tag": "0001_flashy_baron_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777998218378,
+      "tag": "0002_young_dark_beast",
+      "breakpoints": true
     }
   ]
 }

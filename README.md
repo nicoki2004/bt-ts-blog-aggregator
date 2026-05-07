@@ -83,7 +83,11 @@ pnpm start <command> [arguments]
 - **`agg <url>`** - Aggregate posts from a URL
 
 ### Content Browsing
-- **`browse`** - View posts from your followed feeds
+- **`browse [options]`** - View posts from your followed feeds
+  - `--search <query>` or `-s <query>` - Search posts by title or content
+  - `--sort <field>` or `-o <field>` - Sort by 'date' (default) or 'title'
+  - `--order <direction>` or `-r <direction>` - Order as 'asc' or 'desc' (default: 'desc')
+  - `--limit <number>` - Maximum number of posts to display (default: 20)
 
 ## Example Workflow
 
@@ -105,6 +109,16 @@ pnpm start <command> [arguments]
 4. Browse posts:
    ```bash
    pnpm start browse
+   ```
+
+5. Search and filter posts:
+   ```bash
+   pnpm start browse --search "typescript" --sort date --order desc --limit 10
+   ```
+
+6. Browse posts sorted by title:
+   ```bash
+   pnpm start browse -o title -r asc
    ```
 
 ## Project Structure

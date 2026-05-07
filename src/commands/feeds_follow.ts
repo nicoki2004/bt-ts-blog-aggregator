@@ -1,8 +1,7 @@
 import { UUID } from "node:crypto";
-import { readConfig } from "src/config/config";
 import { createFeedFollows, getFeedFollowsFromUser } from "src/lib/db/queries/feed_follows";
-import { getUser } from "src/lib/db/queries/users";
 import { printFeed } from "./feeds";
+import { User } from "src/lib/db/schema";
 
 
 
@@ -17,18 +16,18 @@ export async function getFeedFollowsForUser(user_id: string) {
 }
 
 
-export async function handlerFollowing(cmdName: string, ...args: string[]) {
+export async function handlerFollowing(cmdName: string, user: User, ...args: string[]) {
 	if (args.length !== 0) {
 		throw new Error(`usage: ${cmdName}`);
 	}
 	//Get the user
-	const config = readConfig();
-	const user = await getUser(config.currentUserName);
-
-	if (!user) {
-		throw new Error(`User ${config.currentUserName} not found`);
-	}
-
+	// const config = readConfig();
+	// const user = await getUser(config.currentUserName);
+	//
+	// if (!user) {
+	// 	throw new Error(`User ${config.currentUserName} not found`);
+	// }
+	//
 	const feeds_follow = await getFeedFollowsForUser(user.id)
 
 	for (const feed_f of feeds_follow) {

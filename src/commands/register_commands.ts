@@ -8,6 +8,7 @@ import {
 } from "./users";
 import { handlerAddFeed, handlerFollow, handlerListFeeds } from "./feeds";
 import { handlerFollowing } from "./feeds_follow";
+import { middlewareLoggedIn } from "src/middleware/middleware";
 
 export function getCommands(commandsRegistry: CommandsRegistry) {
 	registerCommand(
@@ -60,7 +61,7 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		"Add feed with name and uel",
 		"addfeed",
 		2,
-		handlerAddFeed,
+		middlewareLoggedIn(handlerAddFeed),
 	);
 
 	registerCommand(
@@ -78,7 +79,7 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		"follow a url",
 		"follow",
 		1,
-		handlerFollow,
+		middlewareLoggedIn(handlerFollow),
 	)
 
 	registerCommand(
@@ -87,6 +88,6 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		"Folllow a feed",
 		"following",
 		0,
-		handlerFollowing,
+		middlewareLoggedIn(handlerFollowing),
 	)
 }

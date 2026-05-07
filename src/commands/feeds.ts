@@ -3,20 +3,19 @@ import { createFeed, getFeedByUrl, getFeeds } from "../lib/db/queries/feeds";
 import { getUser, getUserById } from "../lib/db/queries/users";
 import { Feed, User } from "src/lib/db/schema";
 import { createFeedFollows } from "src/lib/db/queries/feed_follows";
-import { error } from "node:console";
 
-export async function handlerAddFeed(cmdName: string, ...args: string[]) {
+export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]) {
 	if (args.length !== 2) {
 		throw new Error(`usage: ${cmdName} <feed_name> <url>`);
 	}
 
-	const config = readConfig();
-	const user = await getUser(config.currentUserName);
-
-	if (!user) {
-		throw new Error(`User ${config.currentUserName} not found`);
-	}
-
+	// const config = readConfig();
+	// const user = await getUser(config.currentUserName);
+	//
+	// if (!user) {
+	// 	throw new Error(`User ${config.currentUserName} not found`);
+	// }
+	//
 	const feedName = args[0];
 	const url = args[1];
 
@@ -58,7 +57,7 @@ export async function handlerListFeeds(_: string) {
 }
 
 
-export async function handlerFollow(cmdName: string, ...args: string[]) {
+export async function handlerFollow(cmdName: string, user: User, ...args: string[]) {
 	if (args.length !== 1) {
 		throw new Error(`usage: ${cmdName} <url>`);
 	}
@@ -72,12 +71,12 @@ export async function handlerFollow(cmdName: string, ...args: string[]) {
 	}
 
 	//Get the user
-	const config = readConfig();
-	const user = await getUser(config.currentUserName);
-
-	if (!user) {
-		throw new Error(`User ${config.currentUserName} not found`);
-	}
+	// const config = readConfig();
+	// const user = await getUser(config.currentUserName);
+	//
+	// if (!user) {
+	// 	throw new Error(`User ${config.currentUserName} not found`);
+	// }
 
 	//Add a feed_follows.
 	let feed_follow

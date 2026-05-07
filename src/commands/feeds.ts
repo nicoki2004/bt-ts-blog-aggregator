@@ -2,7 +2,7 @@ import { readConfig } from "src/config/config";
 import { createFeed, getFeedByUrl, getFeeds } from "../lib/db/queries/feeds";
 import { getUser, getUserById } from "../lib/db/queries/users";
 import { Feed, User } from "src/lib/db/schema";
-import { createFeedFollows } from "src/lib/db/queries/feed_follows";
+import { createFeedFollows, deleteFeedFromUser } from "src/lib/db/queries/feed_follows";
 
 export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]) {
 	if (args.length !== 2) {
@@ -90,6 +90,28 @@ export async function handlerFollow(cmdName: string, user: User, ...args: string
 	if (feed_follow) {
 		printFeed(feed_follow?.feed, feed_follow?.user)
 	}
+}
+
+export async function handlerUnfollow(cmdName: string, user: User, ...args: string[]) {
+	if (args.length !== 1) {
+		throw new Error(`usage: %{cmdName} <url>`)
+	}
+	const url = args[0]
+	const feed = await getFeedByUrl(url)
+
+	if (!feed) {
+		throw new Error(`Error getting the feed - ${url}`)
+	}
+
+	try {
+		await deleteFeedFromUser(user.id, feed.id)
+	} catch (e) {
+		throw new Error(`Error deleting the feed from user - ${e}`)
+	}
+
+
+	console.log(`Feed from User has been deleted`);
+
 }
 
 

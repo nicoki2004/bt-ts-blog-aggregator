@@ -6,7 +6,7 @@ import {
 	commandReset,
 	commandUsers,
 } from "./users";
-import { handlerAddFeed, handlerFollow, handlerListFeeds } from "./feeds";
+import { handlerAddFeed, handlerFollow, handlerListFeeds, handlerUnfollow } from "./feeds";
 import { handlerFollowing } from "./feeds_follow";
 import { middlewareLoggedIn } from "src/middleware/middleware";
 
@@ -90,4 +90,14 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		0,
 		middlewareLoggedIn(handlerFollowing),
 	)
+
+	registerCommand(
+		commandsRegistry,
+		"unfollow",
+		"Unfollow a feed",
+		"unfollow",
+		1,
+		middlewareLoggedIn(handlerUnfollow),
+	)
+
 }

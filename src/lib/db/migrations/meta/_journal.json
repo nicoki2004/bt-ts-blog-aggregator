@@ -29,6 +29,13 @@
       "when": 1778158792188,
       "tag": "0003_far_diamondback",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1778162501777,
+      "tag": "0004_loving_machine_man",
+      "breakpoints": true
     }
   ]
 }

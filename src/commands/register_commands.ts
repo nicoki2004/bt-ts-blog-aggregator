@@ -1,5 +1,5 @@
 import { CommandsRegistry, registerCommand } from "./command_handler";
-import { commandAgg } from "./aggregate";
+import { commandAgg, handlerAgg } from "./aggregate";
 import {
 	commandLogin,
 	commandRegister,
@@ -52,7 +52,7 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		"get feeds from a url",
 		"agg",
 		1,
-		commandAgg,
+		handlerAgg,
 	);
 
 	registerCommand(

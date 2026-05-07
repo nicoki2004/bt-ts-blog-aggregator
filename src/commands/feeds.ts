@@ -1,6 +1,5 @@
-import { readConfig } from "src/config/config";
 import { createFeed, getFeedByUrl, getFeeds } from "../lib/db/queries/feeds";
-import { getUser, getUserById } from "../lib/db/queries/users";
+import { getUserById } from "../lib/db/queries/users";
 import { Feed, User } from "src/lib/db/schema";
 import { createFeedFollows, deleteFeedFromUser } from "src/lib/db/queries/feed_follows";
 
@@ -9,13 +8,6 @@ export async function handlerAddFeed(cmdName: string, user: User, ...args: strin
 		throw new Error(`usage: ${cmdName} <feed_name> <url>`);
 	}
 
-	// const config = readConfig();
-	// const user = await getUser(config.currentUserName);
-	//
-	// if (!user) {
-	// 	throw new Error(`User ${config.currentUserName} not found`);
-	// }
-	//
 	const feedName = args[0];
 	const url = args[1];
 
@@ -70,13 +62,6 @@ export async function handlerFollow(cmdName: string, user: User, ...args: string
 		throw new Error(`Feed from ${url} not found`)
 	}
 
-	//Get the user
-	// const config = readConfig();
-	// const user = await getUser(config.currentUserName);
-	//
-	// if (!user) {
-	// 	throw new Error(`User ${config.currentUserName} not found`);
-	// }
 
 	//Add a feed_follows.
 	let feed_follow

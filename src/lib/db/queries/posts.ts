@@ -1,6 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { db } from "..";
-import { feeds, posts, users } from "../schema";
+import { feeds, posts } from "../schema";
 
 
 

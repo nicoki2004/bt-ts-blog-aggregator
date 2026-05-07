@@ -20,14 +20,7 @@ export async function handlerFollowing(cmdName: string, user: User, ...args: str
 	if (args.length !== 0) {
 		throw new Error(`usage: ${cmdName}`);
 	}
-	//Get the user
-	// const config = readConfig();
-	// const user = await getUser(config.currentUserName);
-	//
-	// if (!user) {
-	// 	throw new Error(`User ${config.currentUserName} not found`);
-	// }
-	//
+
 	const feeds_follow = await getFeedFollowsForUser(user.id)
 
 	for (const feed_f of feeds_follow) {

@@ -6,7 +6,8 @@ import {
 	commandReset,
 	commandUsers,
 } from "./users";
-import { handlerAddFeed, handlerListFeeds } from "./feeds";
+import { handlerAddFeed, handlerFollow, handlerListFeeds } from "./feeds";
+import { handlerFollowing } from "./feeds_follow";
 
 export function getCommands(commandsRegistry: CommandsRegistry) {
 	registerCommand(
@@ -69,5 +70,23 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		"feeds",
 		0,
 		handlerListFeeds,
+	)
+
+	registerCommand(
+		commandsRegistry,
+		"follow",
+		"follow a url",
+		"follow",
+		1,
+		handlerFollow,
+	)
+
+	registerCommand(
+		commandsRegistry,
+		"following",
+		"Folllow a feed",
+		"following",
+		0,
+		handlerFollowing,
 	)
 }

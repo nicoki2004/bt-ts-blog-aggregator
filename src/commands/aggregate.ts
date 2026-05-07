@@ -1,4 +1,5 @@
 import { getNextFeedToFetch, markFeedFetched } from "src/lib/db/queries/feeds";
+import { createPost } from "src/lib/db/queries/posts";
 import { Feed } from "src/lib/db/schema";
 import { parseDuration } from "src/lib/time";
 import { fetchFeed } from "src/rss/rss";
@@ -52,6 +53,12 @@ async function scrapeFeed(feed: Feed) {
 	console.log(
 		`Feed ${feed.name} collected, ${feedData.channel.item.length} posts found`,
 	);
+
+	for (let rssItem of feedData.channel.item) {
+		createPost(rssItem.title, rssItem.link, rssItem.description, rssItem.pubDate, feed.id)
+	}
+
+
 }
 
 function handleError(err: unknown) {

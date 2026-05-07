@@ -9,6 +9,7 @@ import {
 import { handlerAddFeed, handlerFollow, handlerListFeeds, handlerUnfollow } from "./feeds";
 import { handlerFollowing } from "./feeds_follow";
 import { middlewareLoggedIn } from "src/middleware/middleware";
+import { handlerBrowse } from "./posts";
 
 export function getCommands(commandsRegistry: CommandsRegistry) {
 	registerCommand(
@@ -98,6 +99,15 @@ export function getCommands(commandsRegistry: CommandsRegistry) {
 		"unfollow",
 		1,
 		middlewareLoggedIn(handlerUnfollow),
+	)
+
+	registerCommand(
+		commandsRegistry,
+		"browse",
+		"Browse youir posts",
+		"browse",
+		1,
+		middlewareLoggedIn(handlerBrowse),
 	)
 
 }

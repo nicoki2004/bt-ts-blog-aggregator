@@ -1,4 +1,7 @@
-import { getPostsForUser } from "src/lib/db/queries/posts";
+
+import parseArgs from 'minimist';
+
+import { getFilteredPosts, getPostsForUser } from "src/lib/db/queries/posts";
 import { User } from "src/lib/db/schema";
 
 type PostSummary = {
@@ -14,12 +17,40 @@ type PostSummary = {
 
 export async function handlerBrowse(cmdName: string, user: User, ...args: string[]) {
 
-	let limit = 2
-	if (args.length === 1) {
-		limit = Number(args[0])
-	}
+	const argv = parseArgs(args, {
+		string: ['search', 'sort', 'order'],
+		alias: {
+			s: 'search',
+			o: 'sort',
+			r: 'order'
+		},
+		default: {
+			sort: 'date',
+			order: 'desc',
+			limit: 20
+		}
+	});
 
-	const posts = await getPostsForUser(user.id, limit)
+
+	const search = argv.search;
+	const sortBy = argv.sort;
+	const limit = parseInt(argv.limit);
+	const order = argv.order
+
+	const posts = await getFilteredPosts(user.id, {
+		search,
+		sortBy: sortBy === 'title' ? 'title' : 'date',
+		limit: limit,
+		order: order,
+
+	});
+	//
+	// let limit = 2
+	// if (args.length === 1) {
+	// 	limit = Number(args[0])
+	// }
+
+	// const posts = await getPostsForUser(user.id, limit)
 	posts.forEach(printPost);
 
 }
